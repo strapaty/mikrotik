@@ -1,0 +1,4 @@
+:if ($bound=1) do={
+  :delay 2s;
+  /system/script/run update_ddns_websupport
+}
