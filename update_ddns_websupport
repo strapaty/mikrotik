@@ -1,0 +1,16 @@
+:local wanIface "ether1"
+
+:local domain "sub.domain.sk"
+
+:local user "user"
+:local password "password"
+
+:local ifaceIp [/ip address get [/ip address find interface=$wanIface] address];
+:local wanIp [:pick $ifaceIp 0 [:find $ifaceIp "/"]];
+
+:local url "https://dyndns.websupport.sk/nic/update?"
+:set url ($url . "hostname=$domain");
+:set url ($url . "&myip=$wanIp");
+
+:log info ("Updating DDNS WebSupport: domain = $domain IP = $wanIp")
+/tool fetch user=$user password=$password url="$url" keep-result=no
